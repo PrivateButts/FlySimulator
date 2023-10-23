@@ -16,4 +16,3 @@ shape = SubResource("CircleShape2D_omwep")
 texture = ExtResource("1_cxs88")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true

@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://diu8rcvd7sb2c"]
+[gd_scene load_steps=3 format=3 uid="uid://diu8rcvd7sb2c"]
 
 [ext_resource type="PackedScene" uid="uid://cyn07acsasr8r" path="res://Prefabs/player.tscn" id="1_2fl5y"]
+[ext_resource type="TileSet" uid="uid://df2owt1o2bjxr" path="res://Assets/Tilemaps/modern interiors/modern interiors.tres" id="2_hvmnr"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2fl5y")]
 position = Vector2(227, 81)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_hvmnr")
+format = 2
