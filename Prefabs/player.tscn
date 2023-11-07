@@ -14,5 +14,3 @@ shape = SubResource("CircleShape2D_omwep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cxs88")
-
-[node name="Camera2D" type="Camera2D" parent="."]
