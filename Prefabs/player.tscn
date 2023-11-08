@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyn07acsasr8r"]
 
-[ext_resource type="Script" path="res://Prefabs/player.gd" id="1_74c3p"]
+[ext_resource type="Script" path="res://Prefabs/playerRauserMovement.gd" id="1_74c3p"]
 [ext_resource type="Texture2D" uid="uid://cw4ghvivis5eb" path="res://Prefabs/Fly/fly.png" id="1_cxs88"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_omwep"]
@@ -14,3 +14,4 @@ shape = SubResource("CircleShape2D_omwep")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cxs88")
+flip_h = true

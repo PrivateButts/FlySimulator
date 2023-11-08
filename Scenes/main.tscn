@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://diu8rcvd7sb2c"]
+[gd_scene load_steps=8 format=3 uid="uid://diu8rcvd7sb2c"]
 
 [ext_resource type="PackedScene" uid="uid://cyn07acsasr8r" path="res://Prefabs/player.tscn" id="1_2fl5y"]
-[ext_resource type="Script" path="res://Scenes/FollowCamera.gd" id="2_hllas"]
+[ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_fr6lr"]
 [ext_resource type="TileSet" uid="uid://df2owt1o2bjxr" path="res://Assets/Tilemaps/modern interiors/modern interiors.tres" id="2_hvmnr"]
-[ext_resource type="Script" path="res://Scenes/ShareSubViewportWorld.gd" id="4_hmred"]
+[ext_resource type="Script" path="res://Prefabs/playerMouseSteering.gd" id="4_7btoi"]
+[ext_resource type="Script" path="res://Scripts/ShareSubViewportWorld.gd" id="4_roa6b"]
+[ext_resource type="Texture2D" uid="uid://c7hfp58hfhhqw" path="res://Assets/circle.png" id="6_twy3h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fqefd"]
+radius = 32.0156
 
 [node name="Main" type="Node2D"]
 
@@ -16,13 +21,17 @@ layer_0/tile_data = PackedInt32Array(-131063, 3080193, 63, -65527, 3080193, 64, 
 position = Vector2(227, 81)
 scale = Vector2(0.1, 0.1)
 zoom = Vector2(10, 10)
-script = ExtResource("2_hllas")
+script = ExtResource("2_fr6lr")
 TARGET = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("1_2fl5y")]
 position = Vector2(227, 81)
 scale = Vector2(0.1, 0.1)
-GRAVITY = 0.0
+script = ExtResource("4_7btoi")
+MIN_SPEED = 40.0
+DRIFT_DRAG = 0.8
+BOUNCE_DRAG = 0.9
+LAND_MARGIN = 1.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -37,11 +46,22 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
-script = ExtResource("4_hmred")
+script = ExtResource("4_roa6b")
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 position = Vector2(294, 117)
+offset = Vector2(-3, -12)
 zoom = Vector2(0.74, 0.74)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(337, 147)
+shape = SubResource("CircleShape2D_fqefd")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
+texture = ExtResource("6_twy3h")
