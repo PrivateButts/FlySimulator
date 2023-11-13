@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cyn07acsasr8r" path="res://Prefabs/player.tscn" id="1_2fl5y"]
 [ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_fr6lr"]
 [ext_resource type="TileSet" uid="uid://df2owt1o2bjxr" path="res://Assets/Tilemaps/modern interiors/modern interiors.tres" id="2_hvmnr"]
-[ext_resource type="Script" path="res://Prefabs/playerMouseSteering.gd" id="4_7btoi"]
 [ext_resource type="Script" path="res://Scripts/ShareSubViewportWorld.gd" id="4_roa6b"]
+[ext_resource type="PackedScene" uid="uid://dts2iklbpdavp" path="res://Prefabs/zapper.tscn" id="6_p4xdp"]
 [ext_resource type="Texture2D" uid="uid://c7hfp58hfhhqw" path="res://Assets/circle.png" id="6_twy3h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqefd"]
@@ -27,11 +27,6 @@ TARGET = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("1_2fl5y")]
 position = Vector2(227, 81)
 scale = Vector2(0.1, 0.1)
-script = ExtResource("4_7btoi")
-MIN_SPEED = 40.0
-DRIFT_DRAG = 0.8
-BOUNCE_DRAG = 0.9
-LAND_MARGIN = 1.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -65,3 +60,6 @@ shape = SubResource("CircleShape2D_fqefd")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
 texture = ExtResource("6_twy3h")
+
+[node name="Zapper" parent="." instance=ExtResource("6_p4xdp")]
+position = Vector2(243, 162)

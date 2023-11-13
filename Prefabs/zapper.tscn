@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dts2iklbpdavp"]
+
+[ext_resource type="Texture2D" uid="uid://c70h5wq082x4y" path="res://Assets/Zapper.png" id="1_eu58o"]
+[ext_resource type="Script" path="res://Prefabs/zapper.gd" id="1_k604m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ogdm"]
+size = Vector2(16, 4)
+
+[node name="Zapper" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_k604m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7ogdm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_eu58o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

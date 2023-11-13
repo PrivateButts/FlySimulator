@@ -1,5 +1,6 @@
-extends CharacterBody2D
+extends Node
 
+var cb: CharacterBody2D
 
 @export var ACCELERATION: float = 1000
 @export var MAX_SPEED: float = 100
@@ -10,6 +11,16 @@ extends CharacterBody2D
 @export var LAND_MARGIN: float = 1.1
 
 var LANDED: bool = false
+
+
+func _ready():
+	var parent: Node2D = get_parent()
+	if parent is CharacterBody2D:
+		cb = parent as CharacterBody2D
+	else:
+		print("Mouse Steering Component must be a child of CharacterBody2D")
+		print(self.get_path())
+		queue_free()
 
 
 func _physics_process(delta):
@@ -23,39 +34,39 @@ func _physics_process(delta):
 	
 	# Rotate to face mouse
 	if not LANDED:
-		var mouse_position = get_global_mouse_position()
-		look_at(mouse_position)
+		var mouse_position = cb.get_global_mouse_position()
+		cb.look_at(mouse_position)
 		# var direction = mouse_position - global_position
 		# velocity = direction.normalized() * velocity.length()
 		# velocity += input_velocity.rotated(rotation-1.5708)
 
-		var local_velocity = velocity.rotated(-rotation)
+		var local_velocity = cb.velocity.rotated(-cb.rotation)
 		local_velocity += input_velocity.rotated(-1.5708)
 		if local_velocity.length() > MIN_SPEED:
 			local_velocity.y *= DRIFT_DRAG
 		else:
 			local_velocity = (Vector2.DOWN * MIN_SPEED).rotated(-1.5708)
-		velocity = local_velocity.rotated(rotation)
+		cb.velocity = local_velocity.rotated(cb.rotation)
 		
 	# Apply drag
-	if velocity.length() > MIN_SPEED:
-		velocity *= DRAG
+	if cb.velocity.length() > MIN_SPEED:
+		cb.velocity *= DRAG
 
 	# Limit speed
-	if velocity.length() > MAX_SPEED:
-		velocity = velocity.normalized() * MAX_SPEED
+	if cb.velocity.length() > MAX_SPEED:
+		cb.velocity = cb.velocity.normalized() * MAX_SPEED
 
-	var collision = move_and_collide(velocity * delta)
+	var collision = cb.move_and_collide(cb.velocity * delta)
 
 	if collision:
 		var normal = collision.get_normal()
-		if velocity.length() > MIN_SPEED * LAND_MARGIN:
-			velocity = velocity.bounce(normal)
-			velocity *= BOUNCE_DRAG
+		if cb.velocity.length() > MIN_SPEED * LAND_MARGIN:
+			cb.velocity = cb.velocity.bounce(normal)
+			cb.velocity *= BOUNCE_DRAG
 		else:
-			velocity = Vector2.ZERO
+			cb.velocity = Vector2.ZERO
 			# Align to surface
-			rotation = normal.angle() + 1.5708
+			cb.rotation = normal.angle() + 1.5708
 			
 			LANDED = true
 			print("landed")

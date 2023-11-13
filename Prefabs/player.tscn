@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyn07acsasr8r"]
 
-[ext_resource type="Script" path="res://Prefabs/playerRauserMovement.gd" id="1_74c3p"]
 [ext_resource type="Texture2D" uid="uid://cw4ghvivis5eb" path="res://Prefabs/Fly/fly.png" id="1_cxs88"]
+[ext_resource type="PackedScene" uid="uid://1rtc8umpwefk" path="res://Components/mouse_movement_component.tscn" id="2_s8m8k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_omwep"]
 radius = 13.0384
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_74c3p")
+motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_omwep")
@@ -15,3 +15,5 @@ shape = SubResource("CircleShape2D_omwep")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cxs88")
 flip_h = true
+
+[node name="MouseMovementComponent" parent="." instance=ExtResource("2_s8m8k")]
