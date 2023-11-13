@@ -19,7 +19,6 @@ func _physics_process(delta):
 	var input_velocity = (Vector2.UP * input.y + Vector2.LEFT * input.x) * ACCELERATION * delta
 
 	if LANDED and input_velocity.length() > 0:
-		print("take off")
 		LANDED = false
 	
 	# Rotate to face mouse
@@ -31,9 +30,11 @@ func _physics_process(delta):
 		# velocity += input_velocity.rotated(rotation-1.5708)
 
 		var local_velocity = velocity.rotated(-rotation)
-		if local_velocity.length() > MIN_SPEED or local_velocity.y < 0:
-			local_velocity.y *= DRIFT_DRAG
 		local_velocity += input_velocity.rotated(-1.5708)
+		if local_velocity.length() > MIN_SPEED:
+			local_velocity.y *= DRIFT_DRAG
+		else:
+			local_velocity = (Vector2.DOWN * MIN_SPEED).rotated(-1.5708)
 		velocity = local_velocity.rotated(rotation)
 		
 	# Apply drag
@@ -42,7 +43,6 @@ func _physics_process(delta):
 
 	# Limit speed
 	if velocity.length() > MAX_SPEED:
-		print("max speed")
 		velocity = velocity.normalized() * MAX_SPEED
 
 	var collision = move_and_collide(velocity * delta)
