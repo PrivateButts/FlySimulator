@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjm7avswf30an"]
+
+[ext_resource type="Script" path="res://Prefabs/FadeIn.gd" id="1_mydgc"]
+[ext_resource type="FontFile" uid="uid://cchd6qvtrk7cq" path="res://Assets/OptimusPrinceps.ttf" id="2_h46fl"]
+[ext_resource type="AudioStream" uid="uid://dqkoell1sw2cl" path="res://Assets/youdied.mp3" id="3_03n57"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxbb0"]
+bg_color = Color(0.105882, 0.105882, 0.105882, 0.94902)
+
+[node name="GameOverScreen" type="CanvasLayer"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wxbb0")
+script = ExtResource("1_mydgc")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("2_h46fl")
+theme_override_font_sizes/font_size = 96
+text = "ZAPPED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_03n57")
+autoplay = true
