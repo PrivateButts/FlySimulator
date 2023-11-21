@@ -1,4 +1,5 @@
 extends Area2D
+class_name HurtBoxComponent
 
 @export var damage = 1
 

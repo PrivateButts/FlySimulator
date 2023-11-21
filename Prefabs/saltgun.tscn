@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://clprfftn4f03w"]
+
+[ext_resource type="Texture2D" uid="uid://cymvka1krisvy" path="res://Assets/bug-gun.png" id="1_8tguy"]
+[ext_resource type="Script" path="res://Prefabs/saltgun.gd" id="1_oj8uf"]
+
+[node name="saltgun" type="Node2D"]
+script = ExtResource("1_oj8uf")
+
+[node name="Bug-gun" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_8tguy")
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(0, -10)

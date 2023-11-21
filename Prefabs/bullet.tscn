@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvvl8ceyfdgop"]
+
+[ext_resource type="Script" path="res://Prefabs/bullet.gd" id="1_777or"]
+[ext_resource type="Texture2D" uid="uid://bsvhoak2s5v1o" path="res://Assets/salt.png" id="1_oqefm"]
+[ext_resource type="PackedScene" uid="uid://cv4flho8sn05i" path="res://Components/hurt_box_component.tscn" id="2_ysqva"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxxbb"]
+radius = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mk2f5"]
+size = Vector2(2, 2)
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_777or")
+
+[node name="Body Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uxxbb")
+
+[node name="HurtBoxComponent" parent="." instance=ExtResource("2_ysqva")]
+collision_layer = 0
+
+[node name="Hurt Box" type="CollisionShape2D" parent="HurtBoxComponent"]
+shape = SubResource("RectangleShape2D_mk2f5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oqefm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
