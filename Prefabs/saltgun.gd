@@ -16,8 +16,11 @@ extends Node2D
 @export var BULLET_BOUNCES: int = 0
 
 ## The spread of the bullets in degrees. Setting a spread of 180 will fire in a cone from -90 to 90 degrees.
-@export var BULLET_SPREAD: float = 0
-@export var RANDOM_SPREAD: bool = false
+@export var BULLET_SPREAD_X: float = 0
+@export var RANDOM_SPREAD_X: bool = false
+
+@export var BULLET_SPREAD_Y: float = 0
+@export var RANDOM_SPREAD_Y: bool = false
 
 ## The number of bullets to fire at once.
 @export var BULLET_COUNT: int = 1
@@ -62,13 +65,13 @@ func fire():
 	for i in range(BULLET_COUNT):
 		var bulletInstance = BULLET.instantiate() as Bullet
 		bulletInstance.position = MUZZLE_POSITION.global_position
-		if(RANDOM_SPREAD):
+		if(BULLET_SPREAD_X):
 			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
-				randf_range(-BULLET_SPREAD / 2, BULLET_SPREAD / 2)
+				randf_range(-BULLET_SPREAD_X / 2, BULLET_SPREAD_X / 2)
 			)
 		else:
 			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
-				-BULLET_SPREAD / 2 + BULLET_SPREAD / (BULLET_COUNT - 1) * i
+				-BULLET_SPREAD_X / 2 + BULLET_SPREAD_X / (BULLET_COUNT - 1) * i
 			)
 
 		bulletInstance.setup(
