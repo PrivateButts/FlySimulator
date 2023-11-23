@@ -78,5 +78,5 @@ func fire():
 			BULLET_BOUNCES,
 			BOUNCE_SOUND
 		)
-		get_parent().add_child(bulletInstance)
+		get_tree().get_root().add_child(bulletInstance)
 
