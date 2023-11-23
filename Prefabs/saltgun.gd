@@ -17,6 +17,8 @@ extends Node2D
 
 ## The spread of the bullets in degrees. Setting a spread of 180 will fire in a cone from -90 to 90 degrees.
 @export var BULLET_SPREAD: float = 0
+@export var RANDOM_SPREAD: bool = false
+
 ## The number of bullets to fire at once.
 @export var BULLET_COUNT: int = 1
 
@@ -26,6 +28,7 @@ extends Node2D
 @export var BOUNCE_SOUND: AudioStream
 
 @onready var MUZZLE_POSITION: Node2D = $Muzzle
+@onready var AUDIO_PLAYER: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 var timer: Timer
@@ -42,6 +45,9 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
+	if FIRE_SOUND:
+		AUDIO_PLAYER.stream = FIRE_SOUND
+
 
 func on_timer_timeout():
 	fire()
@@ -50,12 +56,21 @@ func on_timer_timeout():
 func fire():
 	print("Firing weapon " + name)
 
+	if FIRE_SOUND:
+		AUDIO_PLAYER.play()
+
 	for i in range(BULLET_COUNT):
 		var bulletInstance = BULLET.instantiate() as Bullet
 		bulletInstance.position = MUZZLE_POSITION.global_position
-		bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
-			randf_range(-BULLET_SPREAD / 2, BULLET_SPREAD / 2)
-		)
+		if(RANDOM_SPREAD):
+			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
+				randf_range(-BULLET_SPREAD / 2, BULLET_SPREAD / 2)
+			)
+		else:
+			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
+				-BULLET_SPREAD / 2 + BULLET_SPREAD / (BULLET_COUNT - 1) * i
+			)
+
 		bulletInstance.setup(
 			BULLET_SPEED,
 			BULLET_DAMAGE,

@@ -1,0 +1,20 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://dc5mpq7reu8bh"]
+
+[ext_resource type="AudioStream" uid="uid://c4hkm2sld7eli" path="res://Assets/sfx/impacts/impactWood_light_000.ogg" id="1_n0r5v"]
+[ext_resource type="AudioStream" uid="uid://bt2cjjap11xs" path="res://Assets/sfx/impacts/impactWood_light_001.ogg" id="2_w1c5r"]
+[ext_resource type="AudioStream" uid="uid://dwc3u4nwrhuof" path="res://Assets/sfx/impacts/impactWood_light_002.ogg" id="3_juhfi"]
+[ext_resource type="AudioStream" uid="uid://cxwmgn3m3w6jx" path="res://Assets/sfx/impacts/impactWood_light_003.ogg" id="4_v3hcw"]
+[ext_resource type="AudioStream" uid="uid://crkgsvf13ohcu" path="res://Assets/sfx/impacts/impactWood_light_004.ogg" id="5_najuw"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_n0r5v")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_w1c5r")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_juhfi")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_v3hcw")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("5_najuw")
+stream_4/weight = 1.0

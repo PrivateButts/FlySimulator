@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://ds6ilelb0cf8n"]
+
+[ext_resource type="AudioStream" uid="uid://bt8nki8vxvinw" path="res://Assets/sfx/weapon/zapsplat_warfare_mortar_projectile_launch_002_25232.mp3" id="1_namlp"]
+[ext_resource type="AudioStream" uid="uid://br0rsgkrppa11" path="res://Assets/sfx/weapon/zapsplat_warfare_mortar_projectile_launch_003_25233.mp3" id="2_1fqn8"]
+[ext_resource type="AudioStream" uid="uid://dmesm14bc1g2a" path="res://Assets/sfx/weapon/zapsplat_warfare_mortar_projectile_launch_004_25234.mp3" id="3_snstp"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_namlp")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_1fqn8")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_snstp")
+stream_2/weight = 1.0

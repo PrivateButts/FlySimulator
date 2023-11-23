@@ -27,3 +27,4 @@ shape = SubResource("RectangleShape2D_mk2f5")
 texture = ExtResource("1_oqefm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_distance = 100.0

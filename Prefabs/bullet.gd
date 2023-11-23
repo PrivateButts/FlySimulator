@@ -43,7 +43,7 @@ func _physics_process(delta):
 	if collision:
 		if BOUNCES > 0:
 			BOUNCES -= 1
-			velocity = velocity.bounce(collision.normal)
+			velocity = velocity.bounce(collision.get_normal())
 			if BOUNCE_SOUND:
 				AUDIO_PLAYER.play()
 		else:
