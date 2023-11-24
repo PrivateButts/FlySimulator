@@ -20,7 +20,7 @@ extends Node2D
 @export var RANDOM_SPREAD_X: bool = false
 
 @export var BULLET_SPREAD_Y: float = 0
-@export var RANDOM_SPREAD_Y: bool = false
+@export var Y_SPREAD_MODE: YSpreadMode = YSpreadMode.NONE
 
 ## The number of bullets to fire at once.
 @export var BULLET_COUNT: int = 1
@@ -33,6 +33,11 @@ extends Node2D
 @onready var MUZZLE_POSITION: Node2D = $Muzzle
 @onready var AUDIO_PLAYER: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
+enum YSpreadMode {
+	NONE,
+	DELAY,
+	VELOCITY
+}
 
 var timer: Timer
 
@@ -65,7 +70,7 @@ func fire():
 	for i in range(BULLET_COUNT):
 		var bulletInstance = BULLET.instantiate() as Bullet
 		bulletInstance.position = MUZZLE_POSITION.global_position
-		if(BULLET_SPREAD_X):
+		if RANDOM_SPREAD_X:
 			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
 				randf_range(-BULLET_SPREAD_X / 2, BULLET_SPREAD_X / 2)
 			)
@@ -73,13 +78,22 @@ func fire():
 			bulletInstance.rotation = MUZZLE_POSITION.global_rotation + deg_to_rad(
 				-BULLET_SPREAD_X / 2 + BULLET_SPREAD_X / (BULLET_COUNT - 1) * i
 			)
+		
+		var delay = 0
+		var speed = BULLET_SPEED
+		if Y_SPREAD_MODE == YSpreadMode.DELAY:
+			delay = randf_range(0, BULLET_SPREAD_Y)
+		elif Y_SPREAD_MODE == YSpreadMode.VELOCITY:
+			speed = randf_range(BULLET_SPEED - BULLET_SPREAD_Y, BULLET_SPEED + BULLET_SPREAD_Y)
+
+
 
 		bulletInstance.setup(
-			BULLET_SPEED,
+			speed,
 			BULLET_DAMAGE,
 			BULLET_LIFE,
 			BULLET_BOUNCES,
+			delay,
 			BOUNCE_SOUND
 		)
 		get_tree().get_root().add_child(bulletInstance)
-

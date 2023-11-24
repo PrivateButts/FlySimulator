@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2np4fbfgb1ve"]
+[gd_scene load_steps=2 format=3 uid="uid://b2np4fbfgb1ve"]
 
-[ext_resource type="PackedScene" uid="uid://clprfftn4f03w" path="res://Prefabs/saltgun.tscn" id="1_3mew7"]
 [ext_resource type="Script" path="res://Prefabs/turret.gd" id="1_6ie1g"]
 
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_6ie1g")
-
-[node name="saltgun" parent="." instance=ExtResource("1_3mew7")]
-position = Vector2(12, 0)
-rotation = 1.5708

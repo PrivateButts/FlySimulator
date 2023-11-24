@@ -11,6 +11,8 @@ class_name Bullet
 @export var LIFE: float = 0
 ## The number of times the bullet can bounce off walls. 0 means no bouncing, -1 means infinite.
 @export var BOUNCES: int = 0
+## The delay in milliseconds before the bullet starts moving.
+@export var DELAY: float = 0
 
 ## The sound to play when the bullet hits a wall.
 @export var BOUNCE_SOUND: AudioStream
@@ -20,24 +22,30 @@ class_name Bullet
 @onready var HURT_BOX: HurtBoxComponent = $HurtBoxComponent
 
 var current_life: float = 0
+var start_time: float = 0
 
 
-func setup(speed: float, damage: float, life: float=0, bounces: int=0, bounceSound: AudioStream=null):
+func setup(speed: float, damage: float, life: float=0, bounces: int=0, delay: float=0, bounceSound: AudioStream=null):
 	SPEED = speed
-	velocity = (SPEED * Vector2.UP).rotated(rotation)
+	velocity = (SPEED * Vector2.RIGHT).rotated(rotation)
 	DAMAGE = damage
 	LIFE = life
 	current_life = life
 	BOUNCES = bounces
 	BOUNCE_SOUND = bounceSound
+	DELAY = delay
 
 
 func _ready():
+	start_time = Time.get_ticks_msec() + DELAY
 	HURT_BOX.damage = DAMAGE
 	if BOUNCE_SOUND:
 		AUDIO_PLAYER.stream = BOUNCE_SOUND
 
 func _physics_process(delta):
+	if start_time > Time.get_ticks_msec():
+		return
+
 	var collision = move_and_collide(velocity * delta)
 
 	if collision:
