@@ -24,7 +24,6 @@ func lunge(body: PlayerCharacter):
 	print("Lunge!")
 	var direction = body.get_global_position() - get_global_position()
 	direction = direction.normalized()
-	look_at(body.get_global_position())
 	velocity = direction * lungeDistance
 	cooldown.start()
 
@@ -33,7 +32,9 @@ func _physics_process(_delta):
 	move_and_collide(velocity)
 	velocity = velocity.lerp(Vector2.ZERO, lungeDecay)
 
-	if targets.size() > 0 and cooldown.is_stopped():
-		cooldown.start()
-		lunge(targets[0])
+	if targets.size() > 0:
+		look_at(targets[0].get_global_position())
+		if cooldown.is_stopped():
+			cooldown.start()
+			lunge(targets[0])
 
