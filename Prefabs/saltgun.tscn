@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ds6ilelb0cf8n" path="res://Assets/sfx/weapon/saltgun.tres" id="3_xkh5i"]
 [ext_resource type="AudioStream" uid="uid://dc5mpq7reu8bh" path="res://Assets/sfx/impacts/light.tres" id="4_onjf0"]
 
-[node name="saltgun" type="Node2D"]
+[node name="saltgun" type="Node2D" groups=["weapons"]]
 script = ExtResource("1_oj8uf")
 BULLET = ExtResource("2_j5lqp")
 BULLET_SPEED = 15.0

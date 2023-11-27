@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ogdm"]
 size = Vector2(16, 4)
 
-[node name="Zapper" type="Node2D"]
+[node name="Zapper" type="Node2D" groups=["weapons"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_eu58o")

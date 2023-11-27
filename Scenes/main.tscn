@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://diu8rcvd7sb2c"]
+[gd_scene load_steps=12 format=3 uid="uid://diu8rcvd7sb2c"]
 
 [ext_resource type="PackedScene" uid="uid://cyn07acsasr8r" path="res://Prefabs/player.tscn" id="1_2fl5y"]
 [ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_fr6lr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cjm7avswf30an" path="res://Prefabs/GameOver.tscn" id="7_a3b1v"]
 [ext_resource type="PackedScene" uid="uid://b2np4fbfgb1ve" path="res://Prefabs/turret.tscn" id="8_8fnbv"]
 [ext_resource type="PackedScene" uid="uid://clprfftn4f03w" path="res://Prefabs/saltgun.tscn" id="9_xelel"]
+[ext_resource type="PackedScene" uid="uid://d2yqd051ng62s" path="res://Prefabs/lunger.tscn" id="10_x8tif"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqefd"]
 radius = 32.0156
@@ -79,3 +80,9 @@ BULLET_LIFE = 10.0
 BULLET_SPREAD_X = 30.0
 BULLET_SPREAD_Y = 5.0
 Y_SPREAD_MODE = 2
+
+[node name="Lunger" parent="." instance=ExtResource("10_x8tif")]
+position = Vector2(188, 58)
+lungeDistance = 1
+
+[node name="Zapper" parent="Lunger" instance=ExtResource("6_p4xdp")]

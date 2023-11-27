@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2yqd051ng62s"]
+
+[ext_resource type="Script" path="res://Prefabs/lunger.gd" id="1_ix7go"]
+[ext_resource type="Texture2D" uid="uid://n5nt5m1sy53f" path="res://Assets/debug arrow circle.png" id="1_xpv06"]
+[ext_resource type="Texture2D" uid="uid://b7sh2a56bwso4" path="res://Assets/debug circle.png" id="3_j2eoo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_edsm3"]
+radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_67rya"]
+radius = 34.0
+
+[node name="Lunger" type="CharacterBody2D"]
+script = ExtResource("1_ix7go")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+rotation = 1.5708
+texture = ExtResource("1_xpv06")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(1, 0.815686, 0, 1)
+show_behind_parent = true
+texture = ExtResource("3_j2eoo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_edsm3")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_67rya")
+debug_color = Color(0.701961, 0, 0, 0.101961)
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
