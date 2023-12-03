@@ -12,6 +12,7 @@ size = Vector2(16, 4)
 texture = ExtResource("1_eu58o")
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("2_hhgnx")]
+collision_priority = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 shape = SubResource("RectangleShape2D_7ogdm")

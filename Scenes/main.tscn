@@ -71,6 +71,7 @@ texture = ExtResource("6_twy3h")
 position = Vector2(243, 162)
 
 [node name="Turret" parent="." instance=ExtResource("8_8fnbv")]
+process_mode = 4
 position = Vector2(190, 100)
 
 [node name="saltgun" parent="Turret" instance=ExtResource("9_xelel")]
@@ -82,9 +83,17 @@ BULLET_SPREAD_X = 30.0
 BULLET_SPREAD_Y = 5.0
 Y_SPREAD_MODE = 2
 
-[node name="Swatter" parent="." instance=ExtResource("11_ovf6q")]
-position = Vector2(252, 56)
-
 [node name="Lunger" parent="." instance=ExtResource("10_x8tif")]
 position = Vector2(188, 58)
 lungeDistance = 1
+
+[node name="Swatter" parent="Lunger" instance=ExtResource("11_ovf6q")]
+SWING_TIME = 0.1
+
+[node name="CollisionShape2D" parent="Lunger/Swatter/DectectionZone" index="0"]
+position = Vector2(13.5, 0)
+
+[node name="Zapper" parent="Lunger/Swatter/Holder" index="0" instance=ExtResource("6_p4xdp")]
+position = Vector2(17, 0)
+
+[editable path="Lunger/Swatter"]

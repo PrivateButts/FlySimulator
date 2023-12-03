@@ -1,23 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://b87vl16i31pxt"]
+[gd_scene load_steps=3 format=3 uid="uid://b87vl16i31pxt"]
 
-[ext_resource type="PackedScene" uid="uid://dts2iklbpdavp" path="res://Prefabs/zapper.tscn" id="1_ccwj5"]
 [ext_resource type="Script" path="res://Prefabs/swatter.gd" id="1_yfpwu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0aoga"]
-size = Vector2(20, 40)
+size = Vector2(27, 50)
 
 [node name="Swatter" type="Node2D"]
 script = ExtResource("1_yfpwu")
 
-[node name="Detector" type="Area2D" parent="."]
+[node name="DectectionZone" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DectectionZone"]
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_0aoga")
 
 [node name="Holder" type="Node2D" parent="."]
 rotation = 1.5708
 
-[node name="Zapper" parent="Holder" instance=ExtResource("1_ccwj5")]
-position = Vector2(10, 0)
+[connection signal="body_entered" from="DectectionZone" to="." method="_on_area_2d_body_entered"]
