@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2yqd051ng62s"]
+[gd_scene load_steps=7 format=3 uid="uid://d2yqd051ng62s"]
 
 [ext_resource type="Script" path="res://Prefabs/lunger.gd" id="1_ix7go"]
 [ext_resource type="Texture2D" uid="uid://n5nt5m1sy53f" path="res://Assets/debug arrow circle.png" id="1_xpv06"]
 [ext_resource type="Texture2D" uid="uid://b7sh2a56bwso4" path="res://Assets/debug circle.png" id="3_j2eoo"]
+[ext_resource type="PackedScene" uid="uid://ijpf04jqxwc7" path="res://Components/detection_zone_component.tscn" id="4_u07y3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_edsm3"]
 radius = 7.07107
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_67rya"]
-radius = 34.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kmdl"]
+radius = 60.0
 
 [node name="Lunger" type="CharacterBody2D"]
 script = ExtResource("1_ix7go")
@@ -26,15 +27,13 @@ texture = ExtResource("3_j2eoo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_edsm3")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+[node name="DetectionZoneComponent" parent="." instance=ExtResource("4_u07y3")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_67rya")
-debug_color = Color(0.701961, 0, 0, 0.101961)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZoneComponent"]
+shape = SubResource("CircleShape2D_7kmdl")
+debug_color = Color(0.7, 0, 0, 0.419608)
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="TrackingTargets" from="DetectionZoneComponent" to="." method="_on_tracking_targets"]

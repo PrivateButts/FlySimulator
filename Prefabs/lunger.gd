@@ -4,23 +4,10 @@ extends CharacterBody2D
 @export var lungeDecay = 0.1
 
 @onready var cooldown: Timer = $CooldownTimer
-@onready var detectionZone: Area2D = $DetectionZone
-
-var targets: Array[Node2D] = []
 
 
-func _on_area_2d_body_entered(body: Node2D):
-	if body is PlayerCharacter and not body in targets:
-		print("Target added: "+body.name)
-		targets.append(body)
 
-
-func _on_area_2d_body_exited(body):
-	print("Attempting to remove "+body.name+" from targets")
-	targets.erase(body)
-
-
-func lunge(body: PlayerCharacter):
+func lunge(body: Node2D):
 	print("Lunge!")
 	var direction = body.get_global_position() - get_global_position()
 	direction = direction.normalized()
@@ -32,9 +19,9 @@ func _physics_process(_delta):
 	move_and_collide(velocity)
 	velocity = velocity.lerp(Vector2.ZERO, lungeDecay)
 
-	if targets.size() > 0:
-		look_at(targets[0].get_global_position())
-		if cooldown.is_stopped():
-			cooldown.start()
-			lunge(targets[0])
 
+func _on_tracking_targets(bodies: Array[Node2D]):
+	look_at(bodies[0].get_global_position())
+	if cooldown.is_stopped():
+		cooldown.start()
+		lunge(bodies[0])

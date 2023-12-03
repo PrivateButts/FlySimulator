@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2np4fbfgb1ve"]
+[gd_scene load_steps=4 format=3 uid="uid://b2np4fbfgb1ve"]
 
 [ext_resource type="Script" path="res://Prefabs/turret.gd" id="1_6ie1g"]
+[ext_resource type="PackedScene" uid="uid://ijpf04jqxwc7" path="res://Components/detection_zone_component.tscn" id="2_h2kv0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qli5y"]
+radius = 60.0
 
 [node name="Turret" type="Node2D"]
 script = ExtResource("1_6ie1g")
+
+[node name="DetectionZoneComponent" parent="." instance=ExtResource("2_h2kv0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZoneComponent"]
+shape = SubResource("CircleShape2D_qli5y")
+debug_color = Color(0.7, 0, 0, 0.419608)
+
+[connection signal="TrackingTargets" from="DetectionZoneComponent" to="." method="_on_tracking_targets"]

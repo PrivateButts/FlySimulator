@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://8xie1nblrw6n"]
+
+[ext_resource type="Script" path="res://Scripts/ShareSubViewportWorld.gd" id="1_dajdo"]
+
+[node name="Minimap" type="CanvasLayer"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+script = ExtResource("1_dajdo")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(294, 117)
+offset = Vector2(-3, -12)
+zoom = Vector2(0.74, 0.74)

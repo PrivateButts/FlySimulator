@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ijpf04jqxwc7"]
+
+[ext_resource type="Script" path="res://Components/detection_zone_component.gd" id="1_va40p"]
+
+[node name="DetectionZoneComponent" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_va40p")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

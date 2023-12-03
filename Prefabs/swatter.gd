@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var Holder: Node2D = $Holder
 @onready var ROTATION_LIMIT: float = Holder.rotation
+@onready var Detector: DetectionZoneComponent = $DetectionZoneComponent
 
 var CAN_SWING: bool = true
 
@@ -12,9 +13,9 @@ func _ready():
 	for node in get_children():
 		print(node.name)
 
-func _on_area_2d_body_entered(body: Node2D):
-	if body is PlayerCharacter:
-		swing()
+
+func _on_tracking_targets(_bodies: Array[Node2D]):
+	swing()
 
 
 func swing():
