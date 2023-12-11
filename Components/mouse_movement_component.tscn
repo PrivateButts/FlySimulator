@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://1rtc8umpwefk"]
+[gd_scene load_steps=3 format=3 uid="uid://1rtc8umpwefk"]
 
 [ext_resource type="Script" path="res://Prefabs/playerMouseSteering.gd" id="1_r1gxn"]
+[ext_resource type="AudioStream" uid="uid://dc5mpq7reu8bh" path="res://Assets/sfx/impacts/light.tres" id="2_dld2e"]
 
 [node name="MouseMovementComponent" type="Node"]
 script = ExtResource("1_r1gxn")
+BOUNCE_SOUND = ExtResource("2_dld2e")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

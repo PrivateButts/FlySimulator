@@ -8,9 +8,14 @@ var cb: CharacterBody2D
 @export var DRAG: float = .99
 @export var DRIFT_DRAG: float = .5
 @export var BOUNCE_DRAG: float = .1
+@export var BOUNCE_TIMEOUT: float = .5
+@export var BOUNCE_SOUND: AudioStream
 @export var LAND_MARGIN: float = 1.1
 
+@onready var AUDIO_PLAYER: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 var LANDED: bool = false
+var BOUNCING: bool = false
 
 
 func _ready():
@@ -33,7 +38,7 @@ func _physics_process(delta):
 		LANDED = false
 	
 	# Rotate to face mouse
-	if not LANDED:
+	if not LANDED and not BOUNCING:
 		var mouse_position = cb.get_global_mouse_position()
 		cb.look_at(mouse_position)
 		# var direction = mouse_position - global_position
@@ -61,8 +66,16 @@ func _physics_process(delta):
 	if collision:
 		var normal = collision.get_normal()
 		if cb.velocity.length() > MIN_SPEED * LAND_MARGIN:
+			print("bounce: " + str(cb.velocity.length()) + " > " + str(MIN_SPEED * LAND_MARGIN))
 			cb.velocity = cb.velocity.bounce(normal)
 			cb.velocity *= BOUNCE_DRAG
+			BOUNCING = true
+			var tween = create_tween()
+			tween.tween_property(cb, "rotation", cb.rotation+6.283, BOUNCE_TIMEOUT)
+			tween.tween_callback(func(): BOUNCING = false)
+			if BOUNCE_SOUND:
+				AUDIO_PLAYER.stream = BOUNCE_SOUND
+				AUDIO_PLAYER.play()
 		else:
 			cb.velocity = Vector2.ZERO
 			# Align to surface
