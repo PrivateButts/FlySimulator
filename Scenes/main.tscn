@@ -24,5 +24,6 @@ GAME_OVER_SCENE = ExtResource("7_a3b1v")
 [node name="MouseMovementComponent" parent="Player" index="2"]
 ACCELERATION = 250.0
 MAX_SPEED = 25.0
+BOUNCE_TIMEOUT = 1.0
 
 [editable path="Player"]
